@@ -1,4 +1,4 @@
-package secondWeek.diamond1.pptPrbs;
+package secondWeek2ndHW;
 
 import java.util.Random;
 import java.util.Scanner;

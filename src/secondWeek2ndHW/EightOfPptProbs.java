@@ -1,4 +1,4 @@
-package secondWeek.diamond1.pptPrbs;
+package secondWeek2ndHW;
 
 public class EightOfPptProbs {
 

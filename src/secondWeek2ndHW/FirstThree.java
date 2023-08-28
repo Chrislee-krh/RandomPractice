@@ -1,4 +1,4 @@
-package secondWeek.diamond1.pptPrbs;
+package secondWeek2ndHW;
 
 import java.util.Arrays;
 import java.util.Scanner;
