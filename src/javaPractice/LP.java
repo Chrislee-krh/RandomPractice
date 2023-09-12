@@ -2,27 +2,153 @@ package javaPractice;
 
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+import java.util.function.DoubleBinaryOperator;
 import java.util.function.DoubleConsumer;
 import java.util.function.DoubleSupplier;
 import java.util.function.Function;
+import java.util.function.IntBinaryOperator;
 import java.util.function.IntSupplier;
 import java.util.function.ObjDoubleConsumer;
 import java.util.function.ObjIntConsumer;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
+import java.util.function.ToDoubleFunction;
+import java.util.function.ToIntFunction;
+
+import sun.awt.geom.AreaOp.IntOp;
 
 public class LP {
 	
 	static Student[] list = {
-			new Student{"홍길동", 90, 80, "컴공"},
-			new Student{"금동이", 100, 100, "심리학"},
-			new Student{"이장춘", 100, 100, "컴공"}
+			new Student("홍길동", 90, 80, "컴공"),
+			new Student("금동이", 100, 100, "심리학"),
+			new Student("이장춘", 100, 100, "컴공")
 	};
 	
 	public static void main(String[] args) {
-	Function<T, R>
+		
+		double avg = avgMathCS(t -> t.getMajor().equals("컴공"));
+		System.out.println("컴공자들의 평균 수학 점수: " + avg);
+		
+		double avg2 = avgScCS(t -> t.getMajor().equals("컴공"));
+		System.out.println("컴공자들의 평균 과학 점수: " + avg2);
+		
 	}
+	public static double avgScCS(Predicate<Student> ps) {
+		int sum = 0;
+		int cnt = 0;
+		for(Student s : list) {
+			if(ps.test(s)) {
+			sum += s.getScience();
+			cnt++;
+			}
+		}
+		return sum/(double)cnt;
+		
+	}
+	
+	public static double avgMathCS(Predicate<Student> ps) {
+		int sum = 0;
+		int cnt = 0;
+		
+		for(Student s : list) {
+			if(ps.test(s)) {
+				sum += s.getMath();
+				cnt++;
+			}
+		}
+		return (double)sum/cnt;
+	}
+	
+	
+		/* Operator
+		System.out.print("최대 수학 점수: ");
+		int max = maxOrMinMath((a,b) -> (a>=b ? a : b));
+		
+		System.out.println("최소 수학 점수: ");
+		int min = maxOrMinMath((a,b) -> (a<=b? a: b));
+	
+		System.out.println("최대 평균 점수: ");
+		System.out.println(maxAvgMath((a,b) -> (a>=b ? a:b)));
+		
+		System.out.println("최소 평균 점수: ");
+		System.out.println(maxAvgMath((a,b) -> (a<=b ? a:b)));
+		
+	}
+	
+	public static double maxAvgMath(DoubleBinaryOperator io) {
+		int sum = 0;
+		double result = (list[0].getMath() + list[0].getScience())/2.0;
+		for(Student s : list) {
+			result = io.applyAsDouble(result, (s.getMath()+s.getScience())/2.0);
+		}
+		return result;
+	}
+	
+	
+	public static int maxOrMinMath(IntBinaryOperator io) {
+		int result = list[0].getMath();
+		for(Student s : list) {
+			result = io.applyAsInt(result, s.getMath());
+		}
+		System.out.println(result);
+		return result;
+	}
+		/* function
+		System.out.print("학생명: ");
+		printString(t -> t.getName());
+		
+		System.out.print("전공: ");
+		printString(t -> t.getMajor());
+		
+		System.out.println("수학점수: ");
+		printInt(t -> t.getMath());
+		
+		System.out.println("과학점수: ");
+		printInt(t -> t.getScience());
+		
+		System.out.println("수학 점수 합계: ");
+		printSum(t -> t.getMath());
+		
+		System.out.println("수학 점수 평균: ");
+		printAvg(t -> t.getMath());
+	}
+	
+	public static void printAvg(ToDoubleFunction<Student> f) {
+		int sum = 0;
+		int cnt = 0;
+		
+		for(Student s : list) {
+			sum += f.applyAsDouble(s);
+			cnt++;
+		}
+		System.out.println(sum/(double)cnt);
+	}
+	
+	public static void printSum(ToIntFunction<Student> f) {
+		int sum = 0;
+		
+		for(Student s : list) {
+			sum += f.applyAsInt(s);
+		}
+		System.out.println(sum);
+	}
+	
+	public static void printInt(ToIntFunction<Student> f) {
+		for(Student s: list) {
+			System.out.println(f.applyAsInt(s));
+		}
+	}
+	
+	public static void printString(Function<Student, String> f) {
+		for(Student s : list) {
+			System.out.println(f.apply(s));
+		}
+		System.out.println();
+	}
+	*/
 }
-
+	
 class Student{
 	String name;
 	int math;
@@ -32,7 +158,6 @@ class Student{
 	public Student() {}
 
 	public Student(String name, int math, int science, String major) {
-		super();
 		this.name = name;
 		this.math = math;
 		this.science = science;
