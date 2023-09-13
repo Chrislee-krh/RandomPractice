@@ -1,21 +1,20 @@
 package javaPractice;
 
-import java.util.function.BiConsumer;
-import java.util.function.Consumer;
-import java.util.function.DoubleBinaryOperator;
-import java.util.function.DoubleConsumer;
-import java.util.function.DoubleSupplier;
-import java.util.function.Function;
-import java.util.function.IntBinaryOperator;
-import java.util.function.IntSupplier;
-import java.util.function.ObjDoubleConsumer;
-import java.util.function.ObjIntConsumer;
+//import java.util.function.BiConsumer;
+//import java.util.function.Consumer;
+//import java.util.function.DoubleBinaryOperator;
+//import java.util.function.DoubleConsumer;
+//import java.util.function.Function;
+//import java.util.function.IntBinaryOperator;
+//import java.util.function.IntSupplier;
+//import java.util.function.ObjDoubleConsumer;
+//import java.util.function.ObjIntConsumer;
+//import java.util.function.Supplier;
+//import java.util.function.ToDoubleFunction;
+//import java.util.function.ToIntFunction;
+//
+//import sun.awt.geom.AreaOp.IntOp;
 import java.util.function.Predicate;
-import java.util.function.Supplier;
-import java.util.function.ToDoubleFunction;
-import java.util.function.ToIntFunction;
-
-import sun.awt.geom.AreaOp.IntOp;
 
 public class LP {
 	
