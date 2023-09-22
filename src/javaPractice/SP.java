@@ -11,15 +11,80 @@ import java.nio.file.Paths;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.DoubleStream;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class SP {
 	static int num = 1;
 	public static void main(String[] args) {
+		
+		List<String> list = Arrays.asList("독도는", "우리 땅");
+		list.stream().flatMap(data -> Arrays.stream(data.split(" "))).forEach(s -> System.out.println(s));
+
+		
+		List<String> list2 = Arrays.asList("1.1, 2.2, 3.3","4.4,5.5,6.6");
+		DoubleStream dsr = list2.stream().flatMapToDouble(data -> {
+			String[] sArray = data.split(",");
+			Double[] dArray = new double[str.length];
+			for(int i = 0; i<dArray.length; i++) {
+				dArray[i] = Double.parseDouble(str[i].trim());
+			}
+			return Arrays.stream(dArray);
+		});
+		dsr.forEach(n->System.out.println(n));
+		
+		List<String> list = Arrays.asList("홍","홍1");
+		list.stream().distinct().sorted().filter(n-> n.startsWith("홍")).forEach(s -> System.out.println(s));
+		
+		String str = "자바 세상을 만들자";
+		
+		IntStream isr = str.chars();
+		isr.forEach(s -> System.out.println((char)s));
+		
+		Stream<String> str1 = Stream.of("홍","황");
+		Stream<Integer> str2 = Stream.of(1,2,3,4,5);
+		
+		Stream<Object> concat1 = Stream.concat(str1, str2);
+		
+		concat1.forEach(a -> System.out.println(a));
+		
+		
+		List<Integer> list = new ArrayList<Integer>();
+		for(int i = 0; i < list.size(); i++) {
+			list.add(i);
+		}
+		
+		long start = System.nanoTime();
+		list.stream().forEach(s -> {
+			try {
+				Thread.sleep(100);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		});
+		long end = System.nanoTime();
+		System.out.println(end - start);
+		
+		start = System.nanoTime();
+		list.stream().forEach(s -> {
+			
+			try {
+				Thread.sleep(50);
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
+		});
+		end = System.nanoTime();
+		System.out.println(end - start);
+		
+		
+		
+		
 		
 		Shape s1 = new Rectangle(10,3);
 		Shape s2 = new Circle(4);
@@ -29,8 +94,18 @@ public class SP {
 		Map<Object, List<Shape>> map = list.stream().collect(Collectors.groupingBy(f -> f.getClass()));
 		map.get(Class.forName("sth")).stream().forEach(s -> System.out.println(s));
 		
+		list.stream().sorted().forEach(s -> System.out.println(s));
 		
+		list.stream().sorted((a,b) -> b.compareTo(a) - a.compareTo(b)).forEach(s -> System.out.println(s));
+		list.stream().sorted(Comparator::reverseOrder()).forEach(System.out::println);
+		list.stream().sorted(new Comparator<Shape>() {
+			@Override
+			public int compare(Shape o1, Shape o2) {
+				return (int)(o1.area()- o1.area());
+			}
+		}).forEach(System.out::println);
 		
+		list.stream().sorted((a,b) -> a.length()-b.length()).forEach(System.out::println);
 		try {
 			Path path = Paths.get("src");
 			Stream<Path> sr1 = Files.list(path);
